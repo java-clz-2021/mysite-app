@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReadActivity">
+
+
+    <!--1열 번호-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="번호"
+            android:textSize="50px"
+            android:gravity="center_vertical"
+            android:layout_weight="2"
+            />
+
+        <TextView
+            android:id="@+id/txtNo"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:textSize="50px"
+            android:gravity="center_vertical"
+            android:layout_weight="8"
+            />
+    </LinearLayout>
+    <!--//1열 번호-->
+
+
+    <!--2열 이름-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="이름"
+            android:textSize="50px"
+            android:gravity="center_vertical"
+            android:layout_weight="2"
+            />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:text="정우성"
+            android:textSize="50px" />
+    </LinearLayout>
+    <!--//2열 이름-->
+
+    <!--3열 날짜-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="날짜"
+            android:textSize="50px"
+            android:gravity="center_vertical"
+            android:layout_weight="2"
+            />
+
+        <TextView
+            android:id="@+id/txtRegDate"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:text="2021-08-23"
+            android:textSize="50px" />
+    </LinearLayout>
+    <!--//3열 날짜-->
+
+    <!--4열 내용-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10px"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="내용"
+            android:textSize="50px"
+            android:gravity="top"
+            android:layout_weight="2"
+
+            />
+
+        <TextView
+            android:id="@+id/txtContent"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:text="방명록 내용입니다."
+            android:textSize="50px"
+            android:gravity="top"
+            android:layout_weight="8"
+            android:lines="5"
+            />
+    </LinearLayout>
+    <!--//4열 내용-->
+
+    <!--5열 내용-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        >
+
+        <Button
+            android:id="@+id/btnGoList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="리스트로 이동"
+            />
+
+    </LinearLayout>
+    <!--//5열 내용-->
+</LinearLayout>

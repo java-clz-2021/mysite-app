@@ -16,6 +16,14 @@
         app:titleTextColor="#ffffff"
         />
 
+   <Button
+       android:id="@+id/btnGoWriteForm"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="right"
+       android:text="방명록 글쓰기"
+       />
+
     <ListView
         android:id="@+id/lvGuestbookList"
         android:layout_width="match_parent"

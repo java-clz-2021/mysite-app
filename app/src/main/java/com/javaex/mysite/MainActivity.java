@@ -35,21 +35,25 @@ public class MainActivity extends AppCompatActivity {
     //gs
     //일반
 
-    @Override
+
+    //액티비티가 시작될때
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //툴바 관련
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        //위젯 객체화 하기
         btnWrite = (Button)findViewById(R.id.btnWrite);
         edtName = (EditText)findViewById(R.id.edtName);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         edtContent = (EditText)findViewById(R.id.edtContent);
 
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setTitle("방명록쓰기");  //xml에서 속성을 찾아서 처리
 
 
         //저장버튼을 클릭할때
@@ -73,11 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             //데이터전송
             try {
                 //접속정보
-                URL url = new URL("http://192.168.0.62:8088/mysite5/api/guestbook/write2");  //url 생성
+                URL url = new URL("http://192.168.0.223:8088/mysite5/api/guestbook/write2");  //url 생성
 
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();  //url 연결
                 conn.setConnectTimeout(10000); // 10초 동안 기다린 후 응답이 없으면 종료
@@ -139,9 +140,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("javaStudy", "resCode-->" + resCode );
 
                 if(resCode == HttpURLConnection.HTTP_OK){
+                    /*
                     //리스트 액티비티로 전환
                     Intent intent = new Intent(MainActivity.this, ListActivity.class);
                     startActivity(intent);
+                    */
+
+                    //자신 액티비티를 종료시킨다.
+                    finish();
+
                 }
 
             } catch (IOException e) {

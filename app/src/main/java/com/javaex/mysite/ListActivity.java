@@ -1,12 +1,15 @@
 package com.javaex.mysite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,26 +29,60 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
 
     private ListView lvGuestbookList;
+    private Button btnGoWriteForm;
 
+    
+    //액티비티가 처음 실행될때
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        //ListView를 객체화 한다
+        //툴바 관련
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        //xml의 View를 객체화 한다
         lvGuestbookList = (ListView)findViewById(R.id.lvGuestbookList);
+        btnGoWriteForm  = (Button)findViewById(R.id.btnGoWriteForm);
+        
+        /////////////////////////////////////////////////////////////////////////////////////
+        //글쓰기 버튼 관련
+        ////////////////////////////////////////////////////////////////////////////////////
+        
+        //글쓰기 버튼 클릭 이벤트
+        btnGoWriteForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("javaStudy", "방명록 글쓰기 버튼 클릭");
 
+                Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                startActivity(intent);
 
+            }
+        });
 
-        //데이터를 가져온다(서버로부터) -- 임시
-        //List<GuestbookVo> guestbookList = getListFromServer();
+    }
 
+    
+    // 액티비티가 숨겨졌다가 다시 보일때(부활)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        ////////////////////////////////////////////////////////////
+        //리스트 관련 작업
+        /////////////////////////////////////////////////////////////
+        
         //나가서 일해라 (데이터 가져오기  ---> 화면에 그리기(어댑터))
         ListAsyncTask listAsyncTask = new ListAsyncTask();
         listAsyncTask.execute();
 
 
-
+        //리스트 클릭 이벤트
         lvGuestbookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -65,13 +102,21 @@ public class ListActivity extends AppCompatActivity {
                 int no = guestbookVo.getNo();
                 Log.d("javaStudy", "vo.no=" + no);
 
+
+                ////////////////////////////////////////////////////////////////
+                // 글읽기 액티비티로 이동 (글번호 전달해야함)
+                ////////////////////////////////////////////////////////////////
+                Intent intent = new Intent(ListActivity.this, ReadActivity.class);
+                intent.putExtra("no", no);
+                intent.putExtra("name", guestbookVo.getName());
+
+                startActivity(intent);
+
             }
         });
 
+
     }
-
-
-
 
     //이너 클래스
     public class ListAsyncTask extends AsyncTask<Void, Integer, List<GuestbookVo>> {
@@ -89,7 +134,7 @@ public class ListActivity extends AppCompatActivity {
             //서버에 연결을 한다
             //요청을한다
             try {
-                URL url = new URL("http://192.168.0.62:8088/mysite5/api/guestbook/list");  //url 생성
+                URL url = new URL("http://192.168.0.223:8088/mysite5/api/guestbook/list");  //url 생성
 
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();  //url 연결
                 conn.setConnectTimeout(10000); // 10초 동안 기다린 후 응답이 없으면 종료
